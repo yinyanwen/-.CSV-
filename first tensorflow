@@ -5,14 +5,15 @@ Tensorflow
 import tensorflow as tf
 
 # 定义tensorflow里面的常量
-# 优于版本更新，用 tf.compat.v1. 来兼容tensorflow版本1的方法
-tf.compat.v1.disable_eager_execution()
+
+tf.compat.v1.disable_eager_execution() # 优于版本更新，用 tf.compat.v1. 来兼容tensorflow版本1的方法
+
 a = tf.constant([1, 2], dtype=tf.float32, shape=[1, 2], name="a")
 b = tf.constant([3, 4], dtype=tf.float32, shape=[1, 2], name="b")
 c = tf.constant([5, 6], dtype=tf.float32, shape=[1, 2], name="c")
 
 # 启动tensorflow session
-sess = tf.compat.v1.Session()
+sess = tf.compat.v1.Session() # v2.2 函数前用compat.v1.似乎是必须的
 
 # 计算变量a
 sess.run(a)
@@ -26,6 +27,7 @@ m = tf.multiply(c, s, name="multiply")
 sess.run(m)
 
 # 定义tensorflow里面的变量Variable
+
 x = tf.Variable(0, name="counter")
 one = tf.constant(1)
 # update = tf.assign(x, tf.add(x, one))
@@ -57,4 +59,4 @@ sess.run([output],
 
 # 将计算过程的log记录下来，并使用tensorboard进行可视化
 writer = tf.compat.v1.summary.FileWriter("logs/tensorflow_basic/", graph=sess.graph)
-writer.close()
+writer.close() # 后加入代码，关闭writer,不是必须的
